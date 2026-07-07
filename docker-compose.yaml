@@ -1,0 +1,15 @@
+services:
+  log_service:
+    build: .
+    container_name: log_service
+    image: atelie_log_service
+    networks:
+      - atelie-network
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+
+networks:
+  atelie-network:
+    external: true
