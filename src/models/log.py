@@ -7,7 +7,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 from datetime import datetime
 
 class AuditLog(Base):
-    __tablename__ = 'auditlog'
+    __tablename__ = 'audit_log'
 
     log_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     event_id: Mapped[str] = mapped_column(String(50), unique=True, nullable=False, index=True) #log_id do evento

@@ -79,18 +79,14 @@ def run_migrations_online() -> None:
     with connectable.connect() as connection:
         connection.execute(text(f"CREATE SCHEMA IF NOT EXISTS {settings.DATABASE_SCHEMA};"))
 
-        #connection.execute(text(f"SET search_path TO {settings.DATABASE_SCHEMA};"))
+        connection.execute(text(f"SET search_path TO {settings.DATABASE_SCHEMA};"))
 
-        connection.exec_driver_sql(
-            f"SET search_path TO {settings.DATABASE_SCHEMA}"
-        )
-
-        #connection.commit()
+        connection.commit()
 
         context.configure(
             connection=connection, 
             target_metadata=target_metadata,
-            include_schemas=True, 
+            include_schemas=False, 
             version_table_schema=settings.DATABASE_SCHEMA, 
         )
 
