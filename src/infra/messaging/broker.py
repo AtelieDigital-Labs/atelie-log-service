@@ -3,7 +3,7 @@ from faststream import FastStream
 from src.core.config import settings
 from contextlib import asynccontextmanager
 from src.infra.messaging.exchanges import declare_exchange
-from src.infra.messaging.queues import log_receiver_queue
+from src.infra.messaging.queues import log_receiver_queue, dlq_queue
 
 
 broker = RabbitBroker(settings.MESSAGING_URL)
@@ -17,6 +17,7 @@ async def lifespan():
     await broker.start()
     await declare_exchange(broker=broker)
     await broker.declare_queue(log_receiver_queue)
+    await broker.declare_queue(dlq_queue)
 
     try:
         yield
