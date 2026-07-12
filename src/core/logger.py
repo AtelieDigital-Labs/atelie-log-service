@@ -2,12 +2,12 @@ import logging
 import sys
 
 formatter = logging.Formatter(
-    "%(asctime)s - %(name)s - %(message)s", datefmt="%Y-%m-%d %H:%M:%S"
+    '%(asctime)s - %(name)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S'
 )
 
 
 def setup_trigger_logger():
-    logger = logging.getLogger("db.logs")
+    logger = logging.getLogger('db.logs')
 
     logger.propagate = False
 
