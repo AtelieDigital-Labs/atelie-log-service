@@ -20,4 +20,6 @@ RUN sed -i 's/\r$//' entrypoint.sh
 # Permissão para o script de entrada
 RUN chmod +x entrypoint.sh
 
+EXPOSE 8000
+
 ENTRYPOINT ["sh", "entrypoint.sh"]
