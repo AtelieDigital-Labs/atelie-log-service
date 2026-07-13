@@ -1,14 +1,16 @@
 from datetime import datetime
-from typing import Dict, Any
+from typing import Any, Dict
 
 from pydantic import BaseModel
+
 
 class ActorSchema(BaseModel):
     user_id: str
 
+
 class AuditLogPayload(BaseModel):
     log_id: str
-    timestamp: datetime  
+    timestamp: datetime
     microservice: str
     actor: ActorSchema
     action: str

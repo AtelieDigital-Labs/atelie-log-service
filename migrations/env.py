@@ -1,26 +1,24 @@
 import os
 import sys
-
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool, text
-
 from alembic import context
+from sqlalchemy import engine_from_config, pool, text
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from src.core.config import settings
 from src.core.database import Base
-from src.models.log import AuditLog
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
-config = context.config 
+config = context.config
 
 
-db_url = settings.DATABASE_URL.replace("+psycopg_async", "+psycopg").replace("+asyncpg", "+psycopg")
-config.set_main_option("sqlalchemy.url", db_url)
+db_url = settings.DATABASE_URL.replace('+psycopg_async', '+psycopg').replace(
+    '+asyncpg', '+psycopg'
+)
+config.set_main_option('sqlalchemy.url', db_url)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -51,12 +49,12 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    url = config.get_main_option("sqlalchemy.url")
+    url = config.get_main_option('sqlalchemy.url')
     context.configure(
         url=url,
         target_metadata=target_metadata,
         literal_binds=True,
-        dialect_opts={"paramstyle": "named"},
+        dialect_opts={'paramstyle': 'named'},
     )
 
     with context.begin_transaction():
@@ -72,26 +70,24 @@ def run_migrations_online() -> None:
     """
     connectable = engine_from_config(
         config.get_section(config.config_ini_section, {}),
-        prefix="sqlalchemy.",
+        prefix='sqlalchemy.',
         poolclass=pool.NullPool,
     )
 
     with connectable.connect() as connection:
-        connection.execute(text(f"CREATE SCHEMA IF NOT EXISTS {settings.DATABASE_SCHEMA};"))
-
-        #connection.execute(text(f"SET search_path TO {settings.DATABASE_SCHEMA};"))
-
-        connection.exec_driver_sql(
-            f"SET search_path TO {settings.DATABASE_SCHEMA}"
+        connection.execute(
+            text(f'CREATE SCHEMA IF NOT EXISTS {settings.DATABASE_SCHEMA};')
         )
 
-        #connection.commit()
+        connection.execute(text(f'SET search_path TO {settings.DATABASE_SCHEMA};'))
+
+        connection.commit()
 
         context.configure(
-            connection=connection, 
+            connection=connection,
             target_metadata=target_metadata,
-            include_schemas=True, 
-            version_table_schema=settings.DATABASE_SCHEMA, 
+            include_schemas=False,
+            version_table_schema=settings.DATABASE_SCHEMA,
         )
 
         with context.begin_transaction():
