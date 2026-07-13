@@ -139,7 +139,7 @@ Após a criação, **ative o ambiente virtual**:
 Com o ambiente virtual ativo, instale todas as dependências do projeto com o comando:
 
 ```bash
-uv pip install -r requirements.txt
+uv sync
 ```
 
 *Caso deseje instalar as principais bibliotecas manualmente, execute:*
