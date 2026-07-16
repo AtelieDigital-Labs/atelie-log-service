@@ -73,13 +73,13 @@ def upgrade() -> None:
         ['user_id', 'entity_type'],
         unique=False,
     )
-    op.create_table(
-        'alembic_version',
-        sa.Column(
-            'version_num', sa.VARCHAR(length=32), autoincrement=False, nullable=False
-        ),
-        sa.PrimaryKeyConstraint('version_num', name=op.f('alembic_version_pkc')),
-    )
+    # op.create_table(
+    #     'alembic_version',
+    #     sa.Column(
+    #         'version_num', sa.VARCHAR(length=32), autoincrement=False, nullable=False
+    #     ),
+    #     sa.PrimaryKeyConstraint('version_num', name=op.f('alembic_version_pkc')),
+    # )
     # ### end Alembic commands ###
 
 

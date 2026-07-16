@@ -27,7 +27,7 @@ app.add_middleware(SessionMiddleware, secret_key=settings.MIDDLEWARE_STARTLETTE)
 admin = Admin(
     engine,
     title='Ateliê Digital - Auditoria',
-    base_url='/admin/',
+    base_url='/audit/',
     auth_provider=MyAuthProvider(login_path='/sign-in', logout_path='/sign-out'),
 )
 
